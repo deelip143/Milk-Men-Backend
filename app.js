@@ -24,18 +24,16 @@ const corsOptions = {
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
-            callback(new Error('Not allowed by CORS'));
+            callback(new Error(`Not allowed by CORS: ${origin}`));
         }
     },
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow these HTTP methods
-    credentials: true,                        // IMPORTANT for sending cookies/tokens
-    optionsSuccessStatus: 204                 // Handle preflight requests
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", 
+    credentials: true,                        
+    optionsSuccessStatus: 204                 
 };
+
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 
-
-app.use(cors());
 app.use(express.json());
 
 // Routes
