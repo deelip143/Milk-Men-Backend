@@ -11,7 +11,31 @@ import billingRoutes from './routes/billing.routes.js';
 dotenv.config();
 connectDB();
 
+const express = require('express');
+const cors = require('cors');
 const app = express();
+
+const allowedOrigins = [
+    'https://milk-men-frontend.onrender.com',
+    'http://localhost:3000',
+    'http://localhost:4200',
+];
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow these HTTP methods
+    credentials: true,                        // IMPORTANT for sending cookies/tokens
+    optionsSuccessStatus: 204                 // Handle preflight requests
+};
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 
 app.use(cors());
 app.use(express.json());
