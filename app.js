@@ -15,6 +15,7 @@ const app = express();
 
 const allowedOrigins = [
     'https://milk-men-frontend.onrender.com',
+    'https://deelip143.github.io',
     'http://localhost:3000',
     'http://localhost:4200',
 ];
