@@ -9,44 +9,30 @@ import {
   getCustomers,
   getMilkEntryDetails,
   getMonthlyReport,
-  markBillAsPaid
+  markBillAsPaid,
+  updateMilkEntries
 } from '../controllers/billing.controller.js';
 
 const router = express.Router();
 
-// Create bill / Get all bills
-router.route('/')
-  .post(createBill)
-  .get(getAllBills);
+router.route('/').post(createBill).get(getAllBills);
 
-// Get bill by customer and month
-router.route('/:customerId/:month')
-  .get(getBillByCustomerAndMonth);
+router.route('/:customerId/:month').get(getBillByCustomerAndMonth);
 
-// Update existing bill
-router.route('/:id')
-  .put(updateBill);
+router.route('/update-milk-entries').put(updateMilkEntries);
 
-// Accounting report
-router.route('/reports/summary')
-  .get(getAccountingReport);
+router.route('/reports/summary').get(getAccountingReport);
 
-// Update payment status
-router.route('/payment-status/:id')
-  .put(updatePaymentStatus);
+router.route('/payment-status/:id').put(updatePaymentStatus);
 
-// Get Customer List
-router.route('/customers')
-    .get(getCustomers);
+router.route('/customers').get(getCustomers);
 
-// Get Milk Entries
-router.route('/milk-entries')
-    .get(getMilkEntryDetails);
+router.route('/milk-entries').get(getMilkEntryDetails);
 
-router.route('/monthly-report')
-    .get(getMonthlyReport);
+router.route('/monthly-report').get(getMonthlyReport);
 
-router.route('/mark-paid/:id')
-    .put(markBillAsPaid);
+router.route('/mark-paid/:id').put(markBillAsPaid);
+
+router.route('/:id').put(updateBill);
 
 export default router;

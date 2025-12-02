@@ -63,6 +63,8 @@ const billSchema = new mongoose.Schema({
   }
 });
 
+billSchema.index({ customerId: 1, month: 1 }, { unique: true });
+
 // Auto-generate Bill ID (like CUST-0001)
 billSchema.pre('save', async function(next) {
   const doc = this;
